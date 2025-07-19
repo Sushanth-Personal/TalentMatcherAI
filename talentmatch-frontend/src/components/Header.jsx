@@ -1,52 +1,18 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  background-color: #fff5e6;
-`;
-
-const Logo = styled.h1`
-  font-size: 24px;
-  color: #333;
-`;
-
-const NavLinks = styled.div`
-  a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-  }
-  a:hover {
-    color: #007bff;
-  }
-`;
-
-const LoginButton = styled.button`
-  background-color: #d3e0dc;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 14px;
-`;
+import styles from './Header.module.css';
 
 function Header() {
   return (
-    <Nav>
-      <Logo>BreadButter</Logo>
-      <NavLinks>
-        <Link to="/">Home</Link>
-        <Link to="/match">Match Talent</Link>
-        <Link to="/creators">Creators</Link>
-        <Link to="/about">About</Link>
-        <LoginButton>Log in</LoginButton>
-      </NavLinks>
-    </Nav>
+    <header className={styles.header}>
+      <h1 className={styles.logo}>BreadButter</h1>
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.link}>Home</Link>
+        <Link to="/match" className={styles.link}>Match Talent</Link>
+        <Link to="/creators" className={styles.link}>Creators</Link>
+        <Link to="/about" className={styles.link}>About</Link>
+        <button className={styles.loginButton}>Log in</button>
+      </nav>
+    </header>
   );
 }
 

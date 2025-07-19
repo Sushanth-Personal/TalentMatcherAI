@@ -5,9 +5,10 @@
 }
 
 .title {
-  font-size: 32px;
-  color: #333;
+  font-size: 36px;
+  color: #2d3748;
   margin-bottom: 30px;
+  font-weight: 600;
 }
 
 .content {
@@ -18,16 +19,20 @@
 
 .section {
   margin-bottom: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .sectionTitle {
   font-size: 24px;
-  color: #333;
+  color: #2d3748;
   margin-bottom: 10px;
 }
 
 .sectionText {
   font-size: 16px;
-  color: #666;
-  line-height: 1.5;
+  color: #4a5568;
+  line-height: 1.6;
 }

@@ -1,18 +1,10 @@
-import styled from 'styled-components';
-
-const FooterContainer = styled.footer`
-  background-color: #d3e0dc;
-  padding: 20px;
-  text-align: center;
-  color: #333;
-  margin-top: 20px;
-`;
+import styles from './Footer.module.css';
 
 function Footer() {
   return (
-    <FooterContainer>
+    <footer className={styles.footer}>
       <p>Contact: info@breadbutter.com | © 2025 BreadButter</p>
-    </FooterContainer>
+    </footer>
   );
 }
 
