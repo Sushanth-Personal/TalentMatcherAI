@@ -4,12 +4,12 @@ import styles from './Header.module.css';
 function Header() {
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>BreadButter</h1>
+      <div className={styles.logo}>TalentMatch</div>
       <nav className={styles.nav}>
-        <Link to="/" className={styles.link}>Home</Link>
-        <Link to="/match" className={styles.link}>Match Talent</Link>
-        <Link to="/about" className={styles.link}>About</Link>
-        <button className={styles.loginButton}>Log in</button>
+        <Link to="/" className={styles.navLink}>Home</Link>
+        <Link to="/match" className={styles.navLink}>Match Talent</Link>
+        <Link to="/about" className={styles.navLink}>About</Link>
+        <Link to="/login" className={styles.loginButton}>Login</Link>
       </nav>
     </header>
   );
