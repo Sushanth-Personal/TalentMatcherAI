@@ -4,7 +4,6 @@ import HeroSection from './components/HeroSection';
 import WhyUsSection from './components/WhyUsSection';
 import Footer from './components/Footer';
 import MatchTalentPage from './pages/MatchTalentPage';
-import CreatorsDirectoryPage from './pages/CreatorsDirectoryPage';
 import AboutPage from './pages/AboutPage';
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
             }
           />
           <Route path="/match" element={<MatchTalentPage />} />
-          <Route path="/creators" element={<CreatorsDirectoryPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
         <Footer />

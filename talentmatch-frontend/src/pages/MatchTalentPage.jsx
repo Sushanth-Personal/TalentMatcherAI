@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './MatchTalentPage.module.css';
 
 function MatchTalentPage() {
@@ -13,30 +14,18 @@ function MatchTalentPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate API call or matching logic
-    const mockResults = [
-      {
-        name: 'Rekha G.',
-        location: 'Bengaluru',
-        categories: 'Photography, Travel',
-        experience: '6 years',
-        budgetRange: '₹50,000 - ₹75,000',
-        matchScore: '87%',
-        reason: 'Matches on budget, location, style',
-      },
-      {
-        name: 'Siddharth R.',
-        location: 'Mumbai',
-        categories: 'Photography, Lifestyle',
-        experience: '4 years',
-        budgetRange: '₹40,000 - ₹60,000',
-        matchScore: '75%',
-        reason: 'Matches on category, experience',
-      },
-    ];
-    setResults(mockResults);
+    try {
+      const response = await axios.post('http://localhost:5000/api/creators/match', {
+        location: formData.location,
+        budget: formData.budget,
+        category: 'Photography', // Default for now, can be expanded
+      });
+      setResults(response.data);
+    } catch (error) {
+      console.error('Error fetching matches:', error);
+    }
   };
 
   return (
@@ -98,11 +87,9 @@ function MatchTalentPage() {
                 <h4 className={styles.resultName}>{result.name}</h4>
                 <p className={styles.resultLocation}>{result.location}</p>
                 <p className={styles.resultCategories}>
-                  {result.categories} | {result.experience}
+                  {result.category} | {result.experience}
                 </p>
                 <p className={styles.resultBudget}>Budget: {result.budgetRange}</p>
-                <p className={styles.resultScore}>Match Score: {result.matchScore}</p>
-                <p className={styles.resultReason}>{result.reason}</p>
               </div>
             </div>
           ))}
