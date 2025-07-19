@@ -1,128 +1,235 @@
 .container {
-  padding: 50px 20px;
+  padding: 30px 15px;
   background-color: #fff5e6;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+ 
 }
 
 .title {
-  font-size: 36px;
+  font-size: 28px;
   color: #2d3748;
   margin-bottom: 10px;
   font-weight: 600;
 }
 
 .subtitle {
-  font-size: 18px;
+  font-size: 16px;
   color: #4a5568;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .formSection {
-  background-color: #ffe6cc;
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #ffe6cc, #fff5e6);
+  padding: 20px;
+  border-radius: 10px;
+  width: 45%; /* Approximately 40-50% of screen */
+  margin: 0 auto 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.inputGroup {
-  margin-bottom: 15px;
-  text-align: left;
-}
+.form {
 
-.input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.3s;
+
 }
 
-.input:focus {
-  border-color: #a8c0b9;
+.formGroup {
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  color: #2d3748;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.inputWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.locationDropdown {
+  width: 20%; /* Reduced width for better balance */
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px 0 0 6px;
+  font-size: 13px;
+  background-color: #a8c0b9; /* Teal-like color */
+  color: #fff;
+  border-right: none;
+  appearance: none; /* Remove default arrow */
+  position: relative;
+  height: 40px;
+}
+
+.locationDropdown:focus {
+  border-color: #87a39a;
   outline: none;
 }
 
-.select {
-  width: 48%;
-  padding: 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  margin-right: 4%;
-  transition: border-color 0.3s;
+/* Custom arrow with space */
+.locationDropdown::after {
+  content: '▼';
+  position: absolute;
+  right: 0px; /* Space from the right side */
+  top: 0%;
+  transform: translateY(-40%);
+  font-size: 12px;
+  color: #fff;
+  pointer-events: none;
 }
 
-.select:focus {
+
+.projectDescription {
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 6px 6px 0;
+  font-size: 13px;
+  transition: border-color 0.3s;
+  max-height: 40px;
+}
+
+.projectDescription:focus {
   border-color: #a8c0b9;
   outline: none;
 }
 
 .submitButton {
-  background-color: #a8c0b9;
-  color: white;
-  padding: 15px 30px;
+  background-color: #c5d7fe;
+  color: black;
+  display: flex ;
+  align-items: center;
+  justify-content: center;
   border: none;
-  border-radius: 25px;
-  font-size: 16px;
+  border-radius: 0px 15px 15px 0px;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 100%;
+  max-width: 100px;
+  height: 40px;
 }
 
 .submitButton:hover {
   background-color: #87a39a;
 }
 
+.aiInsights {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.insightCard {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+  border-left: 5px solid #a8c0b9; /* Matching color for creative effect */
+}
+
+.insightTitle {
+  font-size: 14px;
+  color: #2d3748;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.insightValue {
+  font-size: 13px;
+  color: #4a5568;
+  word-wrap: break-word;
+}
+
+.hint {
+  font-size: 14px;
+  color: #4a5568;
+  margin-bottom: 15px;
+}
+
 .resultsSection {
-  margin-top: 30px;
+  margin-top: 20px;
   text-align: left;
+  width: 45%; /* Match form width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .resultsTitle {
-  font-size: 24px;
+  font-size: 20px;
   color: #2d3748;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .resultCard {
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
 }
 
 .profileImage {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .resultName {
-  font-size: 18px;
+  font-size: 16px;
   color: #2d3748;
-  margin: 0 0 5px;
+  margin: 0 0 3px;
 }
 
 .resultLocation {
-  font-size: 14px;
+  font-size: 12px;
   color: #4a5568;
-  margin: 5px 0;
+  margin: 3px 0;
 }
 
 .resultCategories {
-  font-size: 14px;
+  font-size: 12px;
   color: #4a5568;
-  margin: 5px 0;
+  margin: 3px 0;
 }
 
 .resultBudget {
-  font-size: 14px;
+  font-size: 12px;
   color: #4a5568;
-  margin: 5px 0;
+  margin: 3px 0;
+}
+
+.resultScore {
+  font-size: 12px;
+  color: #4a5568;
+  margin: 3px 0;
+  font-weight: 600;
+}
+
+.resultReason {
+  font-size: 12px;
+  color: #4a5568;
+  margin: 3px 0;
+  font-style: italic;
 }
