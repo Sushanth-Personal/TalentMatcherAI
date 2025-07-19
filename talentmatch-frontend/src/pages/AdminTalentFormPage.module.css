@@ -1,0 +1,222 @@
+.container {
+  padding: 60px 15px;
+  background-color: #fff5e6;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.title {
+  font-size: 28px;
+  color: #2d3748;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #4a5568;
+  margin-bottom: 20px;
+}
+
+.formSection {
+  background: linear-gradient(135deg, #ffe6cc, #fff5e6);
+  padding: 20px;
+  border-radius: 10px;
+  width: 45%;
+  margin: 0 auto 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+  width: 100%;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  color: #2d3748;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: border-color 0.3s;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.input:focus, .textarea:focus {
+  border-color: #a8c0b9;
+  outline: none;
+}
+
+.inputError {
+  border-color: #e53e3e;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: #a8c0b9;
+  color: #fff;
+  appearance: none;
+  position: relative;
+}
+
+.dropdown:focus {
+  border-color: #87a39a;
+  outline: none;
+}
+
+.dropdown.inputError {
+  border-color: #e53e3e;
+}
+
+.dropdown::after {
+  content: '▼';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #fff;
+  pointer-events: none;
+}
+
+.error {
+  color: #e53e3e;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.success {
+  color: #38a169;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.submitButton, .uploadButton {
+  background-color: #c5d7fe;
+  color: black;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 100px;
+  margin: 0 auto;
+}
+
+.submitButton:hover, .uploadButton:hover {
+  background-color: #87a39a;
+}
+
+.uploadButton:disabled {
+  background-color: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.fileInputWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.fileInput {
+  font-size: 13px;
+}
+
+.talentsSection {
+  margin-top: 20px;
+  text-align: left;
+  width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.talentsTitle {
+  font-size: 20px;
+  color: #2d3748;
+  margin-bottom: 15px;
+}
+
+.hint {
+  font-size: 14px;
+  color: #4a5568;
+  margin-bottom: 15px;
+}
+
+.talentCard {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.talentName {
+  font-size: 16px;
+  color: #2d3748;
+  margin: 0 0 3px;
+}
+
+.talentLocation {
+  font-size: 12px;
+  color: #4a5568;
+  margin: 3px 0;
+}
+
+.talentDetails {
+  font-size: 12px;
+  color: #4a5568;
+  margin: 3px 0;
+}
+
+.editButton {
+  background-color: #c5d7fe;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.editButton:hover {
+  background-color: #87a39a;
+}
