@@ -5,12 +5,15 @@ import WhyUsSection from './components/WhyUsSection';
 import Footer from './components/Footer';
 import MatchTalentPage from './pages/MatchTalentPage';
 import AboutPage from './pages/AboutPage';
+import './App.css';
 
 function App() {
   return (
     <Router>
       <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fff5e6', color: '#333', minHeight: '100vh' }}>
-        <Header />
+        <div className = "Header">
+          <Header />
+        </div>
         <Routes>
           <Route
             path="/"
@@ -24,7 +27,10 @@ function App() {
           <Route path="/match" element={<MatchTalentPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
-        <Footer />
+        <div className = "footer">
+          <Footer />
+        </div>
+        
       </div>
     </Router>
   );

@@ -8,7 +8,6 @@ function Header() {
       <nav className={styles.nav}>
         <Link to="/" className={styles.link}>Home</Link>
         <Link to="/match" className={styles.link}>Match Talent</Link>
-        <Link to="/creators" className={styles.link}>Creators</Link>
         <Link to="/about" className={styles.link}>About</Link>
         <button className={styles.loginButton}>Log in</button>
       </nav>
