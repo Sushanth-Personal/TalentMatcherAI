@@ -1,0 +1,125 @@
+.container {
+  padding: 50px 20px;
+  background-color: #fff5e6;
+  text-align: center;
+}
+
+.title {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.formSection {
+  background-color: #ffe6cc;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.select {
+  width: 48%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-right: 4%;
+}
+
+.submitButton {
+  background-color: #a8c0b9;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #87a39a;
+}
+
+.resultsSection {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.resultsTitle {
+  font-size: 24px;
+  color: #333;
+}
+
+.resultCard {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.resultName {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.resultLocation {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.resultCategories {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.resultBudget {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.resultScore {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.resultReason {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
