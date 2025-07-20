@@ -1,39 +1,52 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import WhyUsSection from './components/WhyUsSection';
 import Footer from './components/Footer';
-import MatchTalentPage from './pages/MatchTalentPage';
-import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 import AdminTalentFormPage from './pages/AdminTalentFormPage';
-import './App.css';
+import MatchTalentPage from './pages/MatchTalentPage';
+import CreatorProfilePage from './pages/CreatorProfilePage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
-      <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fff5e6', color: '#333', minHeight: '100vh' }}>
-        <div className="Header">
-          <Header />
-        </div>
+      <div className = "header">
+   <Header />
+      </div>
+   
+      <div style={{ paddingTop: '80px' }}>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route
-            path="/"
+            path="/match-talents"
             element={
-              <>
-                <HeroSection />
-                <WhyUsSection />
-              </>
+              <ProtectedRoute>
+                <MatchTalentPage />
+              </ProtectedRoute>
             }
           />
-          <Route path="/match" element={<MatchTalentPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin/talent-form" element={<AdminTalentFormPage />} />
+          <Route
+            path="/admin/talent-form"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminTalentFormPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/creator"
+            element={
+              <ProtectedRoute requiredRole="creator">
+                <CreatorProfilePage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
-        <div className="footer">
-          <Footer />
-        </div>
+      </div>
+      <div className ="footer">
+        <Footer/>
       </div>
     </Router>
   );
