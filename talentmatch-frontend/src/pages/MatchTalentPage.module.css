@@ -6,7 +6,6 @@
   flex-direction: column;
   justify-content: center;
   height: 80vh;
- 
 }
 
 .title {
@@ -26,7 +25,7 @@
   background: linear-gradient(135deg, #ffe6cc, #fff5e6);
   padding: 20px;
   border-radius: 10px;
-  width: 45%; /* Approximately 40-50% of screen */
+  width: 45%;
   margin: 0 auto 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -35,9 +34,7 @@
 }
 
 .form {
-
   width: 100%;
-
 }
 
 .formGroup {
@@ -63,15 +60,15 @@
 }
 
 .locationDropdown {
-  width: 20%; /* Reduced width for better balance */
+  width: 20%;
   padding: 10px;
   border: 1px solid #e2e8f0;
   border-radius: 6px 0 0 6px;
   font-size: 13px;
-  background-color: #a8c0b9; /* Teal-like color */
+  background-color: #a8c0b9;
   color: #fff;
   border-right: none;
-  appearance: none; /* Remove default arrow */
+  appearance: none;
   position: relative;
   height: 40px;
 }
@@ -81,18 +78,16 @@
   outline: none;
 }
 
-/* Custom arrow with space */
 .locationDropdown::after {
   content: '▼';
   position: absolute;
-  right: 0px; /* Space from the right side */
+  right: 0px;
   top: 0%;
   transform: translateY(-40%);
   font-size: 12px;
   color: #fff;
   pointer-events: none;
 }
-
 
 .projectDescription {
   max-width: 400px;
@@ -112,7 +107,7 @@
 .submitButton {
   background-color: #c5d7fe;
   color: black;
-  display: flex ;
+  display: flex;
   align-items: center;
   justify-content: center;
   border: none;
@@ -143,7 +138,7 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   width: 200px;
   text-align: center;
-  border-left: 5px solid #a8c0b9; /* Matching color for creative effect */
+  border-left: 5px solid #a8c0b9;
 }
 
 .insightTitle {
@@ -168,7 +163,7 @@
 .resultsSection {
   margin-top: 20px;
   text-align: left;
-  width: 45%; /* Match form width */
+  width: 45%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -220,16 +215,20 @@
   margin: 3px 0;
 }
 
-.resultScore {
+.resultDescription {
   font-size: 12px;
   color: #4a5568;
   margin: 3px 0;
-  font-weight: 600;
 }
 
-.resultReason {
-  font-size: 12px;
-  color: #4a5568;
-  margin: 3px 0;
-  font-style: italic;
+.error {
+  color: #e53e3e;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.success {
+  color: #38a169;
+  font-size: 13px;
+  margin-bottom: 15px;
 }
