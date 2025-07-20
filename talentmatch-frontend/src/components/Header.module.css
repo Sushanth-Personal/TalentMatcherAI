@@ -5,6 +5,10 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .logo {
@@ -17,6 +21,7 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  margin-right: 50px;
 }
 
 .navLink {
@@ -30,6 +35,11 @@
   color: #a8c0b9;
 }
 
+.navLink.active {
+  color: #a8c0b9;
+  font-weight: 600;
+}
+
 .loginButton {
   background-color: #c5d7fe;
   color: black;
@@ -39,8 +49,13 @@
   font-size: 14px;
   text-decoration: none;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .loginButton:hover {
   background-color: #87a39a;
+}
+
+.loginButton.active {
+  background-color: #a8c0b9;
 }
