@@ -20,6 +20,7 @@ function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
+    console.log(baseUrl);
     e.preventDefault();
     try {
       const response = await axios.post(`${baseUrl}/api/auth/login`, formData);
