@@ -1,187 +1,149 @@
+/* MatchTalentPage.module.css */
 .container {
-  padding: 30px 15px;
-  background-color: #fff5e6;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 80vh;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .title {
-  font-size: 28px;
-  color: #2d3748;
+  font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 10px;
-  font-weight: 600;
+  text-align: center;
 }
 
 .subtitle {
-  font-size: 16px;
-  color: #4a5568;
+  font-size: 1.1rem;
+  color: #666;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .formSection {
-  background: linear-gradient(135deg, #ffe6cc, #fff5e6);
-  padding: 20px;
-  border-radius: 10px;
-  width: 45%;
-  margin: 0 auto 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .form {
-  width: 100%;
-}
-
-.formGroup {
-  margin-bottom: 10px;
-  width: 100%;
-  text-align: left;
   display: flex;
-}
-
-.label {
-  display: block;
-  font-size: 13px;
-  color: #2d3748;
-  margin-bottom: 5px;
-  font-weight: 500;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .inputWrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 10px;
-  width: 100%;
-}
-
-.locationDropdown {
-  width: 20%;
-  padding: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px 0 0 6px;
-  font-size: 13px;
-  background-color: #a8c0b9;
-  color: #fff;
-  border-right: none;
-  appearance: none;
-  position: relative;
-  height: 40px;
-}
-
-.locationDropdown:focus {
-  border-color: #87a39a;
-  outline: none;
-}
-
-.locationDropdown::after {
-  content: '▼';
-  position: absolute;
-  right: 0px;
-  top: 0%;
-  transform: translateY(-40%);
-  font-size: 12px;
-  color: #fff;
-  pointer-events: none;
 }
 
 .projectDescription {
-  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   width: 100%;
-  border: 1px solid #e2e8f0;
-  border-radius: 0 6px 6px 0;
-  font-size: 13px;
-  transition: border-color 0.3s;
-  max-height: 40px;
+  box-sizing: border-box;
 }
 
-.projectDescription:focus {
-  border-color: #a8c0b9;
-  outline: none;
+.prioritySection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.priorityTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+.prioritySection label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
 }
 
 .submitButton {
-  background-color: #c5d7fe;
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 0px 15px 15px 0px;
-  font-size: 14px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 100%;
-  max-width: 100px;
-  height: 40px;
 }
 
 .submitButton:hover {
-  background-color: #87a39a;
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .aiInsights {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .insightCard {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 200px;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   text-align: center;
-  border-left: 5px solid #a8c0b9;
+  margin: 5px;
+  min-width: 120px;
 }
 
 .insightTitle {
-  font-size: 14px;
-  color: #2d3748;
+  font-size: 1rem;
+  font-weight: bold;
   margin-bottom: 5px;
-  font-weight: 600;
 }
 
 .insightValue {
-  font-size: 13px;
-  color: #4a5568;
-  word-wrap: break-word;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .hint {
-  font-size: 14px;
-  color: #4a5568;
-  margin-bottom: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .resultsSection {
   margin-top: 20px;
-  text-align: left;
-  width: 45%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .resultsTitle {
-  font-size: 20px;
-  color: #2d3748;
-  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .resultCard {
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 
 .profileImage {
@@ -192,43 +154,36 @@
 }
 
 .resultName {
-  font-size: 16px;
-  color: #2d3748;
-  margin: 0 0 3px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .resultLocation {
-  font-size: 12px;
-  color: #4a5568;
-  margin: 3px 0;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .resultCategories {
-  font-size: 12px;
-  color: #4a5568;
-  margin: 3px 0;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .resultBudget {
-  font-size: 12px;
-  color: #4a5568;
-  margin: 3px 0;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .resultDescription {
-  font-size: 12px;
-  color: #4a5568;
-  margin: 3px 0;
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.error {
-  color: #e53e3e;
-  font-size: 13px;
-  margin-bottom: 15px;
+.resultRating {
+  font-size: 0.9rem;
+  color: #333;
 }
 
-.success {
-  color: #38a169;
-  font-size: 13px;
-  margin-bottom: 15px;
+.resultCompletion {
+  font-size: 0.9rem;
+  color: #333;
 }
