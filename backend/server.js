@@ -7,7 +7,7 @@ const connectDB = require('./db/config');
 
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:5173','https://talent-matcher-7ecnyhc03-sushanths-projects-f300705f.vercel.app'], credentials: true }));
+app.use(cors({ origin: ['http://localhost:5173','https://talent-matcher-ai-rust.vercel.app/'], credentials: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
