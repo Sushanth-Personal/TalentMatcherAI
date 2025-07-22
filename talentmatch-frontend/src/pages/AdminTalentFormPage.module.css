@@ -21,7 +21,7 @@
   margin-bottom: 20px;
 }
 
-.formSection {
+.uploadSection {
   background: linear-gradient(135deg, #ffe6cc, #fff5e6);
   padding: 20px;
   border-radius: 10px;
@@ -30,94 +30,22 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.form {
-  width: 100%;
-}
-
-.formGroup {
-  margin-bottom: 15px;
-  text-align: left;
+.fileInputWrapper {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
-.label {
-  display: block;
+.fileInput {
   font-size: 13px;
-  color: #2d3748;
-  margin-bottom: 5px;
-  font-weight: 500;
-}
-
-.input, .textarea {
-  width: 100%;
   padding: 10px;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
-  font-size: 13px;
-  transition: border-color 0.3s;
+  background-color: #fff;
 }
 
-.textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.input:focus, .textarea:focus {
-  border-color: #a8c0b9;
-  outline: none;
-}
-
-.inputError {
-  border-color: #e53e3e;
-}
-
-.dropdown {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 13px;
-  background-color: #a8c0b9;
-  color: #fff;
-  appearance: none;
-  position: relative;
-}
-
-.dropdown:focus {
-  border-color: #87a39a;
-  outline: none;
-}
-
-.dropdown.inputError {
-  border-color: #e53e3e;
-}
-
-.dropdown::after {
-  content: '▼';
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 12px;
-  color: #fff;
-  pointer-events: none;
-}
-
-.error {
-  color: #e53e3e;
-  font-size: 13px;
-  margin-top: 5px;
-}
-
-.success {
-  color: #38a169;
-  font-size: 13px;
-  margin-bottom: 15px;
-}
-
-.submitButton, .uploadButton {
+.submitButton, .uploadButton, .cancelButton {
   background-color: #c5d7fe;
   color: black;
   border: none;
@@ -126,12 +54,10 @@
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 100%;
-  max-width: 100px;
-  margin: 0 auto;
+  min-width: 100px;
 }
 
-.submitButton:hover, .uploadButton:hover {
+.submitButton:hover, .uploadButton:hover, .cancelButton:hover {
   background-color: #87a39a;
 }
 
@@ -140,14 +66,16 @@
   cursor: not-allowed;
 }
 
-.fileInputWrapper {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+.error {
+  color: #e53e3e;
+  font-size: 13px;
+  margin-top: 10px;
 }
 
-.fileInput {
+.success {
+  color: #38a169;
   font-size: 13px;
+  margin-top: 10px;
 }
 
 .talentsSection {
@@ -204,19 +132,4 @@
   font-size: 12px;
   color: #4a5568;
   margin: 3px 0;
-}
-
-.editButton {
-  background-color: #c5d7fe;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  padding: 5px 10px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.editButton:hover {
-  background-color: #87a39a;
 }
