@@ -23,7 +23,7 @@ const CreatorSchema = new mongoose.Schema({
   // New fields
   isVerified: { type: Boolean, default: false },
   verificationDocs: [{ type: String }], // Array of URLs or file paths
-  ratingsAverage: { type: Number, default: 0, min: 0, max: 5 },
+  ratingsAverage: { type: String, default: 0, min: 0, max: 5 },
   ratingsCount: { type: Number, default: 0, min: 0 },
   reviews: [{
     reviewText: { type: String },

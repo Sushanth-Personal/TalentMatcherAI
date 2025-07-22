@@ -12,63 +12,79 @@ function MatchTalentPage() {
       experience: false,
       ratings: false,
       completionRate: false,
+      'workMode-onsite': false,
+      'workMode-remote': false,
     },
   });
   const [results, setResults] = useState([]);
+  const [finalCheckResults, setFinalCheckResults] = useState([]);
   const [extractedData, setExtractedData] = useState({
     location: 'Not detected',
     budget: 'Not detected',
     category: 'Not detected',
     experience: 'Not detected',
-    responseTime: 'Not detected',
+    workMode: 'Not detected',
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isExtracting, setIsExtracting] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
-  // Debounced function to fetch extracted data
   const fetchExtractedData = useCallback(
     debounce(async (query) => {
       if (!query) {
-        setExtractedData({
+        setExtractedData(prev => ({
+          ...prev,
           location: 'Not detected',
           budget: 'Not detected',
           category: 'Not detected',
           experience: 'Not detected',
-          responseTime: 'Not detected',
-        });
+          // Preserve workMode from checkbox if set
+          workMode: formData.priorities['workMode-onsite'] ? 'onsite' : formData.priorities['workMode-remote'] ? 'remote' : 'Not detected',
+        }));
+        setIsExtracting(false);
         return;
       }
       try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error('No authentication token found');
-        const response = await axios.post(
-          'http://localhost:3000/api/searcher/extract',
-          { query },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setExtractedData({
-          location: response.data.location || 'Not detected',
-          budget: response.data.budget || 'Not detected',
-          category: response.data.category || 'Not detected',
-          experience: response.data.experience ? `${response.data.experience} years` : 'Not detected',
-          responseTime: response.data.responseTime ? `${response.data.responseTime} hours` : 'Not detected',
-        });
+        setIsExtracting(true);
+        const prompt = `
+          You are a JSON extraction tool. Extract the location (city name), budget (amount with currency, e.g., "₹75000"), category (e.g., "Photography", "Videography"), experience (years, e.g., "5 years"), and workMode (e.g., "remote" or "onsite") from the query below. Return *only* a valid JSON object with "location", "budget", "category", "experience", and "workMode" fields. Set fields to null if not found. Extract the location only if explicitly mentioned with indicators like "in", "near", or "at" (e.g., "in Lucknow"). Extract the category by understanding the requirement, e.g., map tasks to the closest professional category (e.g., "making a cake" → "Bakery"). If no clear category can be interpreted, set category to null. For experience, extract numeric years (e.g., "5 years" → 5). For workMode, extract "remote" or "onsite" if mentioned (e.g., "remote photographer" → "remote"); set to null if not specified or ambiguous. Do not include explanatory text.
+          Query: "${query}"
+          Examples:
+          - Query: "Need a photographer in Lucknow for ₹75000 with 5 years experience, remote" → {"location": "Lucknow", "budget": "₹75000", "category": "Photography", "experience": 5, "workMode": "remote"}
+          - Query: "I need someone for making a cake for my wedding budget less than 4000 onsite" → {"location": null, "budget": "₹4000", "category": "Bakery", "experience": null, "workMode": "onsite"}
+          Output:
+        `;
+        const response = await puter.ai.chat(prompt, { model: 'o3-mini' });
+        const result = JSON.parse(response);
+        setExtractedData(prev => ({
+          location: result.location || 'Not detected',
+          budget: result.budget || 'Not detected',
+          category: result.category || 'Not detected',
+          experience: result.experience ? `${result.experience} years` : 'Not detected',
+          // Preserve workMode from checkbox if set, else use extracted value
+          workMode: formData.priorities['workMode-onsite'] ? 'onsite' : formData.priorities['workMode-remote'] ? 'remote' : result.workMode || 'Not detected',
+        }));
         setError('');
       } catch (err) {
-        setError(err.response?.data?.message || 'Failed to extract data');
-        setExtractedData({
+        console.error('Puter.js error:', err);
+        setError('Failed to extract data');
+        setExtractedData(prev => ({
+          ...prev,
           location: 'Not detected',
           budget: 'Not detected',
           category: 'Not detected',
           experience: 'Not detected',
-          responseTime: 'Not detected',
-        });
+          // Preserve workMode from checkbox if set
+          workMode: formData.priorities['workMode-onsite'] ? 'onsite' : formData.priorities['workMode-remote'] ? 'remote' : 'Not detected',
+        }));
+      } finally {
+        setIsExtracting(false);
       }
     }, 2000),
-    []
+    [formData.priorities] // Add dependency to preserve checkbox state
   );
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -77,24 +93,31 @@ function MatchTalentPage() {
     setSuccess('');
   };
 
-  // Handle priority checkbox changes
   const handlePriorityChange = (e) => {
     const { name, checked } = e.target;
-    setFormData({
-      ...formData,
-      priorities: { ...formData.priorities, [name]: checked },
-    });
+    // Ensure only one workMode priority is selected
+    let newPriorities = { ...formData.priorities, [name]: checked };
+    if (name === 'workMode-onsite' && checked) {
+      newPriorities['workMode-remote'] = false;
+    } else if (name === 'workMode-remote' && checked) {
+      newPriorities['workMode-onsite'] = false;
+    }
+    setFormData({ ...formData, priorities: newPriorities });
+    // Update extractedData.workMode based on checkbox
+    setExtractedData(prev => ({
+      ...prev,
+      workMode: name === 'workMode-onsite' && checked ? 'onsite' : name === 'workMode-remote' && checked ? 'remote' : (!newPriorities['workMode-onsite'] && !newPriorities['workMode-remote'] ? 'Not detected' : prev.workMode),
+    }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.projectDescription) {
       setError('Please enter a project description');
       return;
     }
-
     try {
+      setIsSearching(true);
       const token = localStorage.getItem('token');
       if (!token) throw new Error('No authentication token found');
       const priorities = Object.keys(formData.priorities).filter(key => formData.priorities[key]);
@@ -106,22 +129,24 @@ function MatchTalentPage() {
           budget: extractedData.budget !== 'Not detected' ? extractedData.budget : null,
           category: extractedData.category !== 'Not detected' ? extractedData.category : null,
           experience: extractedData.experience !== 'Not detected' ? parseFloat(extractedData.experience) : null,
-          responseTime: extractedData.responseTime !== 'Not detected' ? parseFloat(extractedData.responseTime) : null,
+          workMode: extractedData.workMode !== 'Not detected' ? extractedData.workMode : null,
           priorities,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log('Search response:', response.data);
       setResults(response.data.creators);
+      setFinalCheckResults(response.data.finalCheck);
       setSuccess(response.data.message);
       setError('');
     } catch (err) {
       setError(err.response?.data?.message || 'Search failed');
       setSuccess('');
+    } finally {
+      setIsSearching(false);
     }
   };
 
-  // Clean up debounce on unmount
   useEffect(() => {
     return () => {
       fetchExtractedData.cancel();
@@ -139,12 +164,13 @@ function MatchTalentPage() {
               id="projectDescription"
               type="text"
               name="projectDescription"
-              placeholder="E.g., Need a photographer in Lucknow for ₹75000 with 5 years experience, fast response..."
+              placeholder="E.g., Need a photographer in Lucknow for ₹75000 with 5 years experience, remote..."
               value={formData.projectDescription}
               onChange={handleChange}
               className={styles.projectDescription}
               required
             />
+
           </div>
           <div className={styles.prioritySection}>
             <h4 className={styles.priorityTitle}>Select Priorities</h4>
@@ -193,9 +219,39 @@ function MatchTalentPage() {
               />
               Completion Rate
             </label>
+            <label>
+              <input
+                type="checkbox"
+                name="workMode-onsite"
+                checked={formData.priorities['workMode-onsite']}
+                onChange={handlePriorityChange}
+              />
+              Work Mode: Onsite
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="workMode-remote"
+                checked={formData.priorities['workMode-remote']}
+                onChange={handlePriorityChange}
+              />
+              Work Mode: Remote
+            </label>
           </div>
-          <button type="submit" className={styles.submitButton}>
-            Find Talent
+          <button type="submit" className={styles.submitButton} disabled={isSearching || isExtracting}>
+            {isSearching ? (
+              <div className={styles.buttonSpinnerContainer}>
+                <div className={styles.buttonSpinner}></div>
+                <span>Searching for talent...</span>
+              </div>
+            ) : isExtracting ? (
+              <div className={styles.buttonSpinnerContainer}>
+                <div className={styles.buttonSpinner}></div>
+                <span>Extracting details...</span>
+              </div>
+            ) : (
+              'Find Talent'
+            )}
           </button>
         </form>
       </div>
@@ -219,36 +275,45 @@ function MatchTalentPage() {
           <p className={styles.insightValue}>{extractedData.experience}</p>
         </div>
         <div className={styles.insightCard}>
-          <h4 className={styles.insightTitle}>Response Time</h4>
-          <p className={styles.insightValue}>{extractedData.responseTime}</p>
+          <h4 className={styles.insightTitle}>Work Mode</h4>
+          <p className={styles.insightValue}>{extractedData.workMode}</p>
         </div>
       </div>
       {results.length === 0 && <p className={styles.hint}>{success || 'Submit to see your top matches!'}</p>}
       {results.length > 0 && (
         <div className={styles.resultsSection}>
-          <h3 className={styles.resultsTitle}>Top Matches</h3>
-          {results.map((result, index) => (
-            <div key={result._id} className={styles.resultCard}>
-              <img
-                src={result.pictureUrl || 'https://via.placeholder.com/50'}
-                alt={result.name}
-                className={styles.profileImage}
-              />
-              <div>
-                <h4 className={styles.resultName}>{`${index + 1}. ${result.name}`}</h4>
-                <p className={styles.resultLocation}>{result.location}</p>
-                <p className={styles.resultCategories}>
-                  {result.category} | {result.experience} years | {result.responseTime} hours response
-                </p>
-                <p className={styles.resultBudget}>Budget: {result.budgetRange} | Charges: ₹{result.charges}</p>
-                <p className={styles.resultDescription}>{result.serviceDescription}</p>
-                <p className={styles.resultRating}>Rating: {result.ratingsAverage} ({result.ratingsCount} reviews)</p>
-                <p className={styles.resultCompletion}>Completion Rate: {result.completionRate}%</p>
+          <h3 className={styles.resultsTitle}>Top 3 Matches</h3>
+          {results.map((result, index) => {
+            const finalCheck = finalCheckResults.find(check => check.id === result._id) || {
+              comment: 'No comment available',
+            };
+            return (
+              <div key={result._id} className={styles.resultCard}>
+                <div>
+                  <h4 className={styles.resultName}>{`${index + 1}. ${result.name}`}</h4>
+                  <p className={styles.resultLocation}>{result.location}</p>
+                  <p className={styles.resultCategories}>
+                    {result.category} | {result.experience} years | {result.workMode}
+                  </p>
+                  <p className={styles.resultBudget}>Budget: {result.budgetRange} | Charges: ₹{result.charges}</p>
+                  <p className={styles.resultDescription}>{result.serviceDescription}</p>
+                  <div className={styles.glassComment}>
+                    <p>{finalCheck.comment}</p>
+                  </div>
+                  <p className={styles.resultRating}>Rating: {result.ratingsAverage} ({result.ratingsCount} reviews)</p>
+                  <p className={styles.resultCompletion}>Completion Rate: {result.completionRate}%</p>
+                </div>
+                <img
+                  src={result.pictureUrl || 'https://via.placeholder.com/50'}
+                  alt={result.name}
+                  className={styles.profileImage}
+                />
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
+      <script src="https://js.puter.com/v2/"></script>
     </div>
   );
 }
