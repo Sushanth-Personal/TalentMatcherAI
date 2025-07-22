@@ -43,6 +43,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<LoginPage/>} />
         </Routes>
       </div>
       <div className ="footer">
