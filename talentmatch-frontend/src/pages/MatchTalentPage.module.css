@@ -92,7 +92,7 @@
 }
 
 .submitButton {
-  background-color: #007bff;
+  background-color: #5fb3b3;
   color: white;
   padding: 10px;
   border: none;
@@ -102,7 +102,6 @@
 }
 
 .submitButton:disabled {
-  background-color: #ccc;
   cursor: not-allowed;
 }
 

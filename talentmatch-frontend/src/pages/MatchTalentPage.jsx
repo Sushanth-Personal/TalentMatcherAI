@@ -17,6 +17,7 @@ function MatchTalentPage() {
     },
   });
   const [results, setResults] = useState([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [finalCheckResults, setFinalCheckResults] = useState([]);
   const [extractedData, setExtractedData] = useState({
     location: 'Not detected',
@@ -47,8 +48,11 @@ function MatchTalentPage() {
       }
       try {
         setIsExtracting(true);
+        setIsButtonDisabled(false);
         const prompt = `
-          You are a JSON extraction tool. Extract the location (city name), budget (amount with currency, e.g., "₹75000"), category (e.g., "Photography", "Videography"), experience (years, e.g., "5 years"), and workMode (e.g., "remote" or "onsite") from the query below. Return *only* a valid JSON object with "location", "budget", "category", "experience", and "workMode" fields. Set fields to null if not found. Extract the location only if explicitly mentioned with indicators like "in", "near", or "at" (e.g., "in Lucknow"). Extract the category by understanding the requirement, e.g., map tasks to the closest professional category (e.g., "making a cake" → "Bakery"). If no clear category can be interpreted, set category to null. For experience, extract numeric years (e.g., "5 years" → 5). For workMode, extract "remote" or "onsite" if mentioned (e.g., "remote photographer" → "remote"); set to null if not specified or ambiguous. Do not include explanatory text.
+          You are a JSON extraction tool. Extract the location (city name), budget (amount with currency, e.g., "₹75000"), category (e.g., "Photography", "Videography"), experience (years, e.g., "5 years"), and workMode (e.g., "remote" or "onsite") from the query below.
+           Return *only* a valid JSON object with "location", "budget", "category", "experience", and "workMode" fields.
+            Set fields to null if not found. Figure out the category by understanding the requirement, e.g., map tasks to the closest professional category (e.g., "making a cake" → "Bakery"). If no clear category can be interpreted, set category to null. For experience, extract numeric years (e.g., "5 years" → 5). For workMode, extract "remote" or "onsite" if mentioned (e.g., "remote photographer" → "remote"); set to null if not specified or ambiguous. Do not include explanatory text.
           Query: "${query}"
           Examples:
           - Query: "Need a photographer in Lucknow for ₹75000 with 5 years experience, remote" → {"location": "Lucknow", "budget": "₹75000", "category": "Photography", "experience": 5, "workMode": "remote"}
@@ -91,6 +95,7 @@ function MatchTalentPage() {
     fetchExtractedData(value);
     setError('');
     setSuccess('');
+    setIsButtonDisabled(true);
   };
 
   const handlePriorityChange = (e) => {
@@ -238,7 +243,7 @@ function MatchTalentPage() {
               Work Mode: Remote
             </label>
           </div>
-          <button type="submit" className={styles.submitButton} disabled={isSearching || isExtracting}>
+          <button type="submit" className={styles.submitButton} disabled={isSearching || isExtracting || isButtonDisabled}>
             {isSearching ? (
               <div className={styles.buttonSpinnerContainer}>
                 <div className={styles.buttonSpinner}></div>
