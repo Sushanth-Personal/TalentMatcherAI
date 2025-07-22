@@ -31,6 +31,10 @@ function MatchTalentPage() {
   const [isExtracting, setIsExtracting] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
+  const baseUrl = import.meta.env.VITE_STATUS === 'production' 
+    ? import.meta.env.VITE_BASE_URL_PRODUCTION 
+    : import.meta.env.VITE_BASE_URL_DEPLOYMENT;
+
   const fetchExtractedData = useCallback(
     debounce(async (query) => {
       if (!query) {
@@ -116,6 +120,7 @@ function MatchTalentPage() {
   };
 
   const handleSubmit = async (e) => {
+    console.log(baseUrl)
     e.preventDefault();
     if (!formData.projectDescription) {
       setError('Please enter a project description');
@@ -127,7 +132,7 @@ function MatchTalentPage() {
       if (!token) throw new Error('No authentication token found');
       const priorities = Object.keys(formData.priorities).filter(key => formData.priorities[key]);
       const response = await axios.post(
-        'http://localhost:3000/api/searcher/talents/search',
+        `${baseUrl}/api/searcher/talents/search`,
         {
           query: formData.projectDescription,
           location: extractedData.location !== 'Not detected' ? extractedData.location : null,
@@ -175,7 +180,6 @@ function MatchTalentPage() {
               className={styles.projectDescription}
               required
             />
-
           </div>
           <div className={styles.prioritySection}>
             <h4 className={styles.priorityTitle}>Select Priorities</h4>

@@ -14,6 +14,10 @@ function SignUpPage() {
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
+  const baseUrl = import.meta.env.mode === 'production' 
+    ? import.meta.env.VITE_BASE_URL_PRODUCTION 
+    : import.meta.env.VITE_BASE_URL_DEPLOYMENT;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError('');
@@ -23,7 +27,7 @@ function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/signup', formData);
+      const response = await axios.post(`${baseUrl}/api/auth/signup`, formData);
       localStorage.setItem('token', response.data.token);
       setSuccess('Sign up successful! Redirecting...');
       setTimeout(() => {

@@ -9,12 +9,16 @@ function AdminTalentFormPage() {
   const [file, setFile] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
 
+  const baseUrl = import.meta.env.VITE_STATUS === 'production' 
+    ? import.meta.env.VITE_BASE_URL_PRODUCTION 
+    : import.meta.env.VITE_BASE_URL_DEPLOYMENT;
+
   useEffect(() => {
     const fetchTalents = async () => {
       try {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('No authentication token found');
-        const response = await axios.get('http://localhost:3000/api/admin/talents', {
+        const response = await axios.get(`${baseUrl}/api/admin/talents`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTalents(response.data);
@@ -87,7 +91,7 @@ function AdminTalentFormPage() {
             }
 
             try {
-              const response = await axios.post('http://localhost:3000/api/admin/talents', data, {
+              const response = await axios.post(`${baseUrl}/api/admin/talents`, data, {
                 headers: { Authorization: `Bearer ${token}` },
               });
               createdTalents.push(response.data.creator);

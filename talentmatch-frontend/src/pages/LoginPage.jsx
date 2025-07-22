@@ -9,6 +9,10 @@ function LoginPage() {
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
+  const baseUrl = import.meta.env.VITE_STATUS === 'production' 
+    ? import.meta.env.VITE_BASE_URL_PRODUCTION 
+    : import.meta.env.VITE_BASE_URL_DEPLOYMENT;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError('');
@@ -18,7 +22,7 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', formData);
+      const response = await axios.post(`${baseUrl}/api/auth/login`, formData);
       localStorage.setItem('token', response.data.token);
       setSuccess('Login successful! Redirecting...');
       setTimeout(() => {
